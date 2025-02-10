@@ -1,8 +1,6 @@
-// app.js
-
 // Настройка сцены, камеры и рендерера
 const scene = new THREE.Scene();
-scene.background = new THREE.Color(0xf0f0f0); // Устанавливаем светлый фон
+scene.background = new THREE.Color(0xf0f0f0);
 
 const camera = new THREE.PerspectiveCamera(
   75,
@@ -15,12 +13,12 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
 // Добавляем свет
-const light = new THREE.PointLight(0xffffff, 1, 100); // Белый свет
-light.position.set(10, 10, 10); // Позиция источника света
+const light = new THREE.PointLight(0xffffff, 1, 100);
+light.position.set(10, 10, 10);
 scene.add(light);
 
 // Добавляем дополнительный свет
-const ambientLight = new THREE.AmbientLight(0x404040, 2); // Фоновый свет
+const ambientLight = new THREE.AmbientLight(0x404040, 2);
 scene.add(ambientLight);
 
 // Загрузка 3D модели
@@ -32,7 +30,7 @@ loader.load(
   (gltf) => {
     model = gltf.scene;
     scene.add(model);
-    model.scale.set(1.75, 1.75, 1.75); // Масштабируем модель для удобства
+    model.scale.set(1.75, 1.75, 1.75);
     console.log("Модель загружена", model);
     animate();
   },
@@ -43,13 +41,11 @@ loader.load(
 );
 
 // Камера
-camera.position.set(0, 2, 6); // Устанавливаем камеру в позицию, чтобы видеть модель
-camera.lookAt(0, 0, 0); // Камера смотрит в центр сцены
+camera.position.set(0, 2, 6);
+camera.lookAt(0, 0, 0);
 
-// Управление моделью с помощью мыши
 const controls = new THREE.OrbitControls(camera, renderer.domElement);
 
-// Модальное окно и кнопки
 const modal = document.querySelector(".modal-overlay");
 const closeModalButton = document.querySelector(".close-modal");
 const changeMaterialButton = document.querySelector(".change-material");
@@ -82,12 +78,10 @@ coordinates.addEventListener("click", (e) => {
   }
 });
 
-// Обработчик открытия модального окна (нажимаем на модель)
-function onModelRightClick(event) {
+function onModelLeftClick(event) {
   const raycaster = new THREE.Raycaster();
   const mouse = new THREE.Vector2();
 
-  // Переводим координаты мыши в диапазон от -1 до 1
   mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
   mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
 
@@ -100,7 +94,7 @@ function onModelRightClick(event) {
   const intersects = raycaster.intersectObject(model, true);
 
   if (intersects.length > 0) {
-    modal.style.display = "block"; // Открываем модальное окно только при клике по модели
+    modal.style.display = "block";
   }
 }
 
@@ -130,48 +124,45 @@ changeMaterialButton.addEventListener("click", () => {
   model.traverse((child) => {
     if (child.isMesh) {
       const hex = child.material.color.getHex().toString(16);
-      // Проверяем, если цвет материала этой части модели - голубой
       if (hex == "3f8cff") {
-        child.material.color.set("Blue"); // Меняем на выбранный цвет
+        child.material.color.set("Blue");
       }
     }
   });
 });
 
 // Перехват правого клика
-let rightClickStartTime = 0;
-const clickThreshold = 200; // Порог времени для клика в миллисекундах
+let leftClickStartTime = 0;
+const clickThreshold = 200;
 
 window.addEventListener("mousedown", (event) => {
-  if (event.button === 2) {
-    // 2 — это код для правой кнопки мыши
-    event.preventDefault(); // Отключаем стандартное контекстное меню браузера
-    rightClickStartTime = Date.now(); // Запоминаем время начала клика
+  if (event.button === 0) {
+    event.preventDefault();
+    leftClickStartTime = Date.now();
   }
 });
 
 // Перехват отпускания правой кнопки
 window.addEventListener("mouseup", (event) => {
-  if (event.button === 2 && rightClickStartTime !== 0) {
+  if (event.button === 0 && leftClickStartTime !== 0) {
     // Проверяем, что был начат правый клик
-    const clickDuration = Date.now() - rightClickStartTime; // Время между нажатием и отпусканием
+    const clickDuration = Date.now() - leftClickStartTime;
 
     if (clickDuration <= clickThreshold) {
-      // Если время клика меньше порога, то считаем это быстрым кликом
-      rightClickStartTime = 0; // Сбрасываем время начала
-      onModelRightClick(event); // Открываем модальное окно, если это был клик по модели
+      leftClickStartTime = 0;
+      onModelLeftClick(event);
     } else {
-      rightClickStartTime = 0; // Если время клика слишком долгое, сбрасываем
+      leftClickStartTime = 0;
     }
   }
 });
 
-let isDragging = false; // Флаг для отслеживания состояния перетаскивания
+let isDragging = false;
 let previousMousePosition = { x: 0, y: 0 };
 
 // Отключение стандартного контекстного меню правой кнопки мыши
 window.addEventListener("contextmenu", (event) => {
-  event.preventDefault(); // Это предотвратит появление контекстного меню
+  event.preventDefault();
 });
 
 // Анимация сцены
