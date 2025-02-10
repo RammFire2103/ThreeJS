@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3D Model Viewer</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="canvas-text">Используйте ПКМ на модели</div>
+    <div class="modal-overlay">
+      <div id="modal">
+        <div class="modal__header">
+          <button class="close-modal">
+            <img src="./assets/CloseModal.svg" />
+          </button>
+          <h2>12МК-3-5</h2>
+          <h3>Кран шаровой с пневмоприводом фланцевый</h3>
+          <button class="modal__button_header change-material">
+            Поменять материал
+            <img src="./assets/Rectangle.svg" />
+          </button>
+        </div>
+
+        <div class="container main-roperties-cont">
+          <button class="modal__button main-roperties">
+            Основные свойства
+            <img src="./assets/Rectangle.svg" />
+          </button>
+          <ul class="modal__list">
+            <li class="modal__list-item">
+              <div>
+                <label>Диаметр:</label>
+              </div>
+              <span>80 мм</span>
+            </li>
+            <li class="modal__list-item">
+              <div>
+                <label>Давление:</label>
+              </div>
+              <span>10,0 МПа</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="container coordinates-cont">
+          <button class="modal__button coordinates">
+            Координаты
+            <img src="./assets/Rectangle.svg" />
+          </button>
+          <ul class="modal__list">
+            <li class="modal__list-item">
+              <div>
+                <label>x:</label>
+              </div>
+              <span class="x-span">1</span>
+            </li>
+            <li class="modal__list-item">
+              <div>
+                <label>y:</label>
+              </div>
+              <span class="y-span">2</span>
+            </li>
+            <li class="modal__list-item">
+              <div>
+                <label>z:</label>
+              </div>
+              <span class="z-span">3</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/three@0.140.0/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.140.0/examples/js/loaders/GLTFLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.140.0/examples/js/controls/OrbitControls.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,175 @@
+body {
+  font-family: Roboto Condensed;
+  text-align: center;
+
+  margin: 0;
+}
+canvas {
+  display: block;
+}
+
+.modal-overlay {
+  background-color: rgba(46, 46, 46, 0.562);
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  display: none;
+}
+
+.aaaa {
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
+  overflow-x: hidden;
+  overflow-y: auto;
+  height: 100vh;
+}
+
+.modal__header {
+  overflow: auto;
+  background: -webkit-linear-gradient(180deg, #1b1918, #878686);
+  background: linear-gradient(180deg, #1b1918, #878686);
+  padding: 55px 14px 16px;
+}
+
+button {
+  color: #f2d6c5;
+  font-family: Roboto Condensed;
+}
+
+#modal {
+  max-height: 100vh;
+  overflow: auto;
+  color: #f2d6c5;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 300px;
+  transform: translate(-50%, -50%);
+  background: white;
+  margin: auto 0;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  z-index: 10;
+}
+
+.modal__button {
+  background: #1b1918;
+  width: 100%;
+  border: none;
+  top: 0;
+  padding: 8px 16px;
+  font-weight: 500;
+  font-size: 18px;
+  text-align: left;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.container {
+  overflow: hidden;
+  max-height: 38px;
+}
+
+.hide-1 {
+  animation: hide-dropdown-1 1000ms forwards;
+}
+
+.show-1 {
+  animation: show-dropdown-1 1000ms forwards;
+}
+
+@keyframes hide-dropdown-1 {
+  from {
+    max-height: 139px;
+  }
+  to {
+    max-height: 38px;
+  }
+}
+
+@keyframes show-dropdown-1 {
+  from {
+    max-height: 38px;
+  }
+  to {
+    max-height: 139px;
+  }
+}
+
+.hide-2 {
+  animation: hide-dropdown-2 1000ms forwards;
+}
+
+.show-2 {
+  animation: show-dropdown-2 1000ms forwards;
+}
+
+@keyframes hide-dropdown-2 {
+  from {
+    max-height: 184px;
+  }
+  to {
+    max-height: 38px;
+  }
+}
+
+@keyframes show-dropdown-2 {
+  from {
+    max-height: 38px;
+  }
+  to {
+    max-height: 184px;
+  }
+}
+
+.close-modal {
+  background: none;
+  border: none;
+
+  position: absolute;
+  top: 20px;
+  right: 17px;
+}
+
+#modal h2 {
+  font-weight: 600;
+  font-size: 30px;
+}
+
+#modal h3 {
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.modal__button_header {
+  background-color: #f2d6c5;
+  color: black;
+  border: none;
+  padding: 10px 31.5px;
+}
+
+.modal__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.modal__list-item {
+  padding: 14px 29px;
+  background-color: #514f4f;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  justify-items: start;
+}
+.modal__list-item:not(:last-child) {
+  border-bottom: solid #696361;
+}
+
+.canvas-text {
+  position: absolute;
+  top: 50px;
+  left: 50px;
+  z-index: 1000;
+}
